@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Femenina | El Manifiesto VIP</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png?v=1">
+    <link rel="shortcut icon" type="image/png" href="favicon.png?v=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --pink-light: #FDF3F6; 
+            --pink-mid: #F8D8E3;
+            --pink-dark: #C94C7A;
+            --gold: #D4AF37;
+            --text-light: #F8F8F8;
+            --text-gray: #DDDDDD;
+            --glass-dark: rgba(15, 15, 15, 0.85);
+            --card-glass-dark: rgba(20, 20, 20, 0.75);
+        }
+
+        html { 
+            /* El nuevo fondo oscuro con rosas */
+            background: url('fondo negro rosas.jpeg') center top / cover fixed, #111;
+            min-height: 100%;
+        }
+
+        body { 
+            margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; 
+            color: var(--text-light); overflow-x: hidden; 
+            background: rgba(0, 0, 0, 0.5); /* Filtro para oscurecer un poco la imagen base */
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            min-height: 100vh;
+        }
+
+        /* HEADER GLASS OSCURO */
+        .header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            height: 85px; padding: 0 5%; 
+            background: var(--glass-dark); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3); /* Borde dorado sutil */
+            z-index: 1000;
+        }
+        
+        .logo img { height: 120px; transform: scale(1.1); filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)) brightness(1.2); }
+        .nav-links { display: flex; gap: 20px; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a { color: var(--text-light); text-decoration: none; transition: 0.3s; position: relative; }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+        .menu-toggle { display: none; }
+        .menu-icon { display: none; font-size: 2rem; cursor: pointer; color: var(--gold); }
+
+        /* HERO MANIFIESTO */
+        .hero-manifiesto { text-align: center; padding: 60px 20px 40px; }
+        .hero-manifiesto h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; margin: 0; color: var(--gold); text-shadow: 0 4px 15px rgba(0,0,0,0.8); }
+        .hero-manifiesto .slogan { font-style: italic; color: var(--pink-dark); font-size: 1.8rem; display: block; margin-top: 10px; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .hero-manifiesto p { max-width: 800px; margin: 25px auto 0; font-size: 1.1rem; line-height: 1.7; font-weight: 500; color: var(--text-light); background: rgba(0,0,0,0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        /* CONTENEDOR DE REGLAS */
+        .rules-container {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .rule-card {
+            background: var(--card-glass-dark);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 35px 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-left: 6px solid var(--pink-dark);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .rule-card:hover { 
+            transform: translateY(-5px); 
+            background: rgba(30,30,30,0.85); 
+            border-color: var(--gold);
+        }
+
+        .rule-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold); /* Títulos en Dorado */
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .rule-card h2 span {
+            font-size: 1.2rem;
+            color: var(--pink-dark); /* Subtítulos en Rosa Oscuro */
+            font-style: italic;
+            font-weight: 600;
+            display: block;
+            margin-top: 5px;
+            text-shadow: none;
+        }
+
+        .rule-content p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-gray); /* Blanco perlado suave */
+            margin-bottom: 15px;
+        }
+        .rule-content p:last-child { margin-bottom: 0; }
+        
+        .rule-content strong {
+            color: #FFFFFF; /* Blanco puro para destacar */
+            font-weight: 700;
+        }
+
+        /* SUBLISTAS (Para la regla 4) */
+        .sub-rule {
+            background: rgba(0,0,0,0.6);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 3px solid var(--gold);
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* OUTRO BANNER */
+        .outro-banner { 
+            max-width: 1000px; margin: 0 auto 60px; 
+            background: linear-gradient(135deg, rgba(15,15,15,0.95) 0%, rgba(30,30,30,0.95) 100%); 
+            color: var(--gold); border-radius: 25px; padding: 50px 40px; text-align: center; 
+            border: 1px solid var(--gold); backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+        .outro-banner h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0 0 15px; color: var(--gold); text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+        .outro-banner p { font-size: 1.1rem; line-height: 1.7; color: var(--text-light); max-width: 800px; margin: 0 auto;}
+
+        /* TRUST BAR OSCURO */
+        .trust-bar { 
+            display: flex; justify-content: space-around; padding: 25px 0; background: rgba(10,10,10,0.9); flex-wrap: wrap; gap: 15px; backdrop-filter: blur(10px); border-top: 1px solid rgba(212, 175, 55, 0.3); 
+        }
+        .trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-gray); font-weight: 600; }
+        .trust-item span { font-size: 1.3rem; color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .header { height: 70px; padding: 0 20px; }
+            .logo img { height: 80px; }
+            .menu-icon { display: block; }
+            .nav-links { 
+                display: none; position: absolute; top: 70px; left: 0; width: 100%; 
+                background: rgba(15,15,15,0.98); flex-direction: column; 
+                padding: 20px 0; text-align: center; gap: 15px; 
+                border-bottom: 2px solid var(--gold); backdrop-filter: blur(15px);
+            }
+            .menu-toggle:checked ~ .nav-links { display: flex; }
+            .hero-manifiesto h1 { font-size: 2.3rem; }
+            .hero-manifiesto .slogan { font-size: 1.4rem; }
+            .rule-card { padding: 25px 20px; border-left-width: 4px; }
+            .rule-card h2 { font-size: 1.5rem; }
+            .outro-banner { padding: 40px 20px; border-radius: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo"><a href="index.html"><img src="logo.png" alt="Aura Femenina"></a></div>
+        
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">☰</label>
+
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="tienda_vip.html">Boutique VIP</a>
+            <a href="joyero.html">El Joyero</a>
+            <a href="embajadoras.html">Embajadora</a>
+            <a href="manifiesto.html" class="active">Manifiesto</a>
+        </nav>
+    </header>
+
+    <section class="hero-manifiesto">
+        <h1>📜 EL MANIFIESTO AURA</h1>
+        <span class="slogan">Reglas Claras, Brillo Infinito ✨</span>
+        <p>En Aura creemos en la transparencia. Por eso, hemos creado este pequeño manifiesto para que sepas exactamente cómo sacar el mayor provecho de tus beneficios y cómo funciona nuestro ecosistema. ¡Léelo con atención!</p>
+    </section>
+
+    <div class="rules-container">
+        
+        <div class="rule-card">
+            <h2>1. LA TIENDA GENERAL <span>(Donde comienza tu estatus)</span></h2>
+            <div class="rule-content">
+                <p><strong>Acumulación Perfecta:</strong> Cada dólar ($1) que inviertas en nuestra tienda general se suma íntegramente a tu Joyero. ¡Tu lealtad siempre suma!</p>
+                <p><strong>Precios y Beneficios:</strong> Las compras en esta sección tienen un precio fijo y no utilizan el saldo de tu Joyero. La única excepción y gran privilegio es para nuestras clientas Nivel DIAMANTE, quienes disfrutan de un 15% de descuento automático y para toda la vida en absolutamente todo el catálogo general.</p>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <h2>2. LA BOUTIQUE VIP <span>(La bóveda de tus privilegios)</span></h2>
+            <div class="rule-content">
+                <p><strong>Acceso para Todas:</strong> ¡Todas las chicas Aura son bienvenidas a comprar en la Boutique VIP! Sin embargo, ten en cuenta que si aún no has alcanzado el Nivel Perla (Joyero) o Nivel Sakura (Embajadora), las piezas de lujo tendrán su precio regular (Full Price).</p>
+                <p><strong>El Poder de tu Saldo:</strong> El verdadero beneficio lo disfrutas cuando ya tienes un nivel VIP activo. Usarás el saldo acumulado en tu Joyero para desbloquear el descuento exclusivo de cada pieza. Cada producto tiene un descuento fijo asignado, por lo que siempre pagarás un precio final súper rebajado (el Joyero cubre esa diferencia, no el total del producto).</p>
+                <p><strong>Tu Joyero Siempre Crece:</strong> ¡Aquí viene lo mejor! Las compras que realices en la Boutique VIP también suman a tu Joyero. Aunque pagues un precio con súper descuento, el valor que se suma a tu cuenta es el precio normal (Full Price) del producto. Por ejemplo: si una pieza tiene un precio normal de $20 y usas tu Joyero para desbloquear el descuento y pagar solo $12, al momento de recibir tu pedido y enviar tu foto de confirmación, ¡se sumarán los $20 íntegros a tu cuenta! Así, tu estatus nunca deja de avanzar.</p>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <h2>3. EL ESTATUS Y TU NÚMERO <span>(Tu identidad en Aura)</span></h2>
+            <div class="rule-content">
+                <p><strong>Tu saldo es eterno:</strong> Todo lo que acumules en tu Joyero es tuyo y está seguro. Tu saldo no tiene fecha de caducidad, ¡nunca vence! Puedes usarlo cuando tú decidas.</p>
+                <p><strong>Tu número de WhatsApp es tu cuenta:</strong> Todo tu progreso, nivel VIP, saldo, compras y comisiones por referidas están vinculados estrictamente al número de WhatsApp con el que nos contactas. Tu cuenta es personal e intransferible. Por políticas de seguridad, no transferimos saldos, niveles ni estatus a números nuevos bajo ninguna circunstancia. Si pierdes tu teléfono, la única forma de conservar tu avance en Aura es recuperando tu línea oficial (tu mismo número) con tu operadora.</p>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <h2>4. NUESTRO PACTO DE ENTREGA <span>(Cuidando el ecosistema Aura)</span></h2>
+            <div class="rule-content">
+                <p><strong>Beneficio Inmediato:</strong> Al momento de solicitar tu pedido VIP, el saldo correspondiente para desbloquear tu descuento se restará automáticamente de tu cuenta.</p>
+                <p><strong>Compromiso Mutuo:</strong> Nos tomamos muy en serio la logística para que tus productos lleguen seguros a la puerta de tu casa, asumiendo nosotras el costo de envío. Por esta razón, si tu pedido llega a tu destino y decides no recibirlo, el saldo del Joyero que utilizaste para ese descuento se perderá de forma permanente. Para mantener estos increíbles beneficios para todas, no podemos realizar reembolsos de saldo por pedidos no recibidos.</p>
+                <p><strong>Responsabilidad y Confianza Mutua:</strong> Entendemos que los imprevistos ocurren (¡todas trabajamos y tenemos días complicados!). Por eso, nuestra política de entregas se basa en la confianza y se adapta a tu historial con nosotras:</p>
+                
+                <div class="sub-rule">
+                    <p><strong>Para las nuevas Chicas Aura:</strong> Si recién te unes a nuestra comunidad y, lamentablemente, tus dos primeros pedidos consecutivos son rechazados o no recibidos en puerta, tu número quedará bloqueado de forma permanente en nuestro sistema por motivos de seguridad.</p>
+                </div>
+                <div class="sub-rule">
+                    <p><strong>Para nuestras Clientas Fieles:</strong> ¡Tranquila! Si ya eres parte de la familia y tienes un historial de compras exitosas con nosotras (es decir, tienes más pedidos recibidos con éxito que devueltos), esta regla estricta de bloqueo automático no aplica para ti. Sabemos que un imprevisto le pasa a cualquiera; si algún día no puedes recibir a la transportadora, lo revisaremos de forma interna para ayudarte a solucionarlo. ¡Nuestra prioridad es cuidarte a ti y a los beneficios de toda la comunidad!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <h2>5. EL RITUAL DE LA FOTO <span>(La llave que activa tu Joyero)</span></h2>
+            <div class="rule-content">
+                <p><strong>El paso final indispensable:</strong> Para que todas tus compras (o las comisiones por recomendar a tus amigas) se sumen oficialmente a tu Joyero, hay una última regla que no puedes saltarte: envíanos a nuestro WhatsApp una foto real del producto en tus manos en cuanto lo recibas.</p>
+                <p><strong>¿Por qué lo hacemos?</strong> Nos encanta saber que tu paquete llegó perfecto a tus manos. Esta foto es la confirmación definitiva que necesitamos para activar tus puntos y registrar tu avance.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="outro-banner">
+        <h2>💖 BIENVENIDA AL ECOSISTEMA AURA</h2>
+        <p>Ser una Chica Aura es mucho más que comprar; es pertenecer a una comunidad diseñada para consentirte, donde tu lealtad siempre se recompensa y tu brillo se multiplica. Estamos felices de acompañarte en este viaje. ¡Prepárate para disfrutar de todos tus privilegios y dejar que tu esencia deslumbre!</p>
+    </section>
+
+    <div class="trust-bar">
+        <div class="trust-item"><span>🚚</span> Envío Gratis a todo el Ecuador</div>
+        <div class="trust-item"><span>💵</span> Pagos Seguros Contra Entrega</div>
+        <div class="trust-item"><span>✔️</span> Garantía de Calidad</div>
+        <div class="trust-item"><span>🎧</span> Atención 24/7</div>
+    </div>
+
+</body>
+</html>
